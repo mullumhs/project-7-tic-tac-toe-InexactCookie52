@@ -1,29 +1,15 @@
 #def bad():
 """
-    def main():
-        board = initialiseBoard()
-        displayBoard(board)
-        player = 1
+while True:
+        if choice.isdigit():
+            choice = int(choice)
+            if choice>=1 and choice <=7:
+                break
+            else: 
+                choice = input("Input colum number between 1 and 7: ")
+        else: 
+            choice = input("Input colum number between 1 and 7: ")
 
-        
-    def initialiseBoard():
-        board = []
-        for _ in range(6):
-            row = []
-            for _ in range(7):
-                row.append('|_|')
-            board.append(row) 
-        return board
-        
-    def displayBoard(board):
-        for row in board:
-            for cell in row:
-                print(cell, end=' ')
-            print()
-        print()
-
-    if __name__ == "__main__":
-        main()
 """
 board = []
 def initialise_board():
@@ -39,20 +25,32 @@ def print_board():
             print(col, end='|')
         print()
 
+def move():
+    player_count = 1
+    while True: 
+        
+        if not player_count % 2 == 0:
+            token = 'X'
+            print ("player X turn; ")
+        if player_count % 2 == 0:
+            token = 'O'
+            print ("Player O turn")
+
+        choice = int(input("Input colum number between 1 and 7: "))
+        choice -= 1
+        for i in range(5, -1, -1):
+            if board[i][choice] == '-':
+                board[i][choice] = token   
+                player_count += 1
+                break
+        
+        for row in range(6):
+            for col in row:
+                print()
+                
+        print_board()
+        
+
 initialise_board()
 print_board()
-player_count = 1
-while True: 
-    token = 'X'
-    if player_count % 2 == 0:
-        token = 'O'
-
-    choice = int(input("Input colum number between 1 and 7: "))
-    choice -= 1
-    for i in range(5, -1, -1):
-        if board[i][choice] == '-':
-            board[i][choice] = token   
-            player_count += 1
-            break
-        
-    print_board()
+move()
