@@ -1,30 +1,19 @@
-#def bad():
-"""
-while True:
-        if choice.isdigit():
-            choice = int(choice)
-            if choice>=1 and choice <=7:
-                break
-            else: 
-                choice = input("Input colum number between 1 and 7: ")
-        else: 
-            choice = input("Input colum number between 1 and 7: ")
-
-"""
 board = []
+#colom_key = {[]}
 def initialise_board():
-    for i in range(6):
-        board.append(["-","-","-","-","-","-","-",])
+    for i in range(3):
+        i += 1
+        board.append(["-","-","-", i])
+
         
 
 def print_board():
-    print (" 1 2 3 4 5 6 7")
+    print (" A B C")
     for row in board:
         print ("", end='|')
         for col in row:
             print(col, end='|')
         print()
-
 def move():
     player_count = 1
     while True: 
@@ -36,8 +25,23 @@ def move():
             token = 'O'
             print ("Player O turn")
 
-        choice = int(input("Input colum number between 1 and 7: "))
-        choice -= 1
+        choice_col = input("please select the colom you would like to place, Either A B or C: ").title
+        if choice_col == 'A':
+            choice_col = 0
+        elif choice_col == 'B':
+            choice_col = 1
+        elif choice_col == 'C':
+            choice_col = 2
+        else:
+            print("invalid input: ")
+
+
+
+
+        choice_row = int(input("now please select a row to place in, either 1 2 or 3: "))
+        choice_row += 1
+        board[choice_row][choice_col] = token
+        """
         for i in range(5, -1, -1):
             if board[i][choice] == '-':
                 board[i][choice] = token   
@@ -47,10 +51,7 @@ def move():
         for row in range(6):
             for col in row:
                 print()
-                
-        print_board()
-        
-
+"""
 initialise_board()
-print_board()
 move()
+print_board()
