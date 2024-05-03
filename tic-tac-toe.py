@@ -12,10 +12,10 @@ def print_board():
             print(col, end='|')
         print()
 def move(turncount):
+
     
     player_count = turncount
     while True: 
-        print_board()
         if not player_count % 2 == 0:
             token = 'X'
             print ("player X turn; ")
@@ -44,20 +44,52 @@ def move(turncount):
 
             if board[choice_row][colom_key[choice_col]] == '-':
                 board[choice_row][colom_key[choice_col]] = token
-                player_count += 1
                 break
             else:
                 print("this spot is already taken!: ")
-
         break
+def hor_win():
+    for i in range(0,3):
+        if board[0][i] == board[1][i] == board[2][i] and not board [0][i] == '-':
+            if board[0][i] == 'X':
+                return 'X'
+            if board[0][i] == 'O':
+                return 'O'
+    return 'false'
+def vert_win(): 
+    for i in range(0,3):
+        if board[i][0] == board[i][1] == board[i][2] and not board [i][0] == '-':
+            if board[i][0] == 'X':
+                return 'X'
+            if board[i][0] == 'O':
+                return 'O'
+    return 'false'
+def diagonal_win():
+    if board[0][0] == board[1][1] == board[2][2] and not board [1][1] == '-' or board[0][2] == board[1][1] == board[2][0] and not board [1][1] == '-':
+        if board[1][1] == 'X':
+            return "X"
+        if board[1][1] == 'O':
+            return "O"
+    return 'false'
 def main():
+    print ("Welcome To Tic Tac Toe!")
     initialise_board()
     turncount = 1
     while True:
-        move(turncount)
         print_board()
+        move(turncount)
         turncount += 1
-        if turncount == 9:
+        if hor_win() == "X" or vert_win() == "X" or diagonal_win() == 'X':
+            print_board()
+            print("X wins!")
             break
-#figure out player count
+        elif hor_win() == "O" or vert_win() == "O" or diagonal_win() == 'O':
+            print_board()
+            print("O wins!")
+            break
+        elif hor_win() == "false" or vert_win() == "false" or diagonal_win() == 'false':
+            print("")
+        if turncount == 10:
+            print("Draw!")
+            break
 main()
