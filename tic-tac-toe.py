@@ -2,18 +2,21 @@ board = []
 colom_key = {"A": 0,"B": 1,"C": 2}
 def initialise_board():
     for i in range(3):
-        i += 1
-        board.append(["-","-","-", i])
+        # adds the number to the side of the board
+        board.append(["-","-","-"])
+        #makes a list of dictionarys to make the board
 def print_board():
-    print (" A B C")
-    for row in board:
-        print ("", end='|')
+    i = 0
+    for row in board: 
+        i += 1
+        print (i, end= '|')
         for col in row:
             print(col, end='|')
+            #makes the dividing lines between the board
         print()
+    print ("  A B C")
+    #makes the abc under the board
 def move(turncount):
-
-    
     player_count = turncount
     while True: 
         if not player_count % 2 == 0:
